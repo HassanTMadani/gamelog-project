@@ -1,9 +1,8 @@
-<%- include('../partials/header') %>
+<%- include('./partials/header') %>
 
 <div class="auth-container">
     <h2>Login to GameLog</h2>
 
-    <%# This block displays any generic errors passed from the controller %>
     <% if (errors && errors.length > 0) { %>
         <div class="error-message">
             <ul>
@@ -28,4 +27,4 @@
     <p class="auth-switch">Don't have an account? <a href="/register">Register here</a></p>
 </div>
 
-<%- include('../partials/footer') %>
+<%- include('./partials/footer') %>
