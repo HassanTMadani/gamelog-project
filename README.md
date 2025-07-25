@@ -32,7 +32,7 @@ Follow these steps to set up and run the project locally.
 ### 2. Clone the Repository
 
 ```bash
-git clone [YOUR_GITHUB_REPO_URL]
+git clone https://github.com/HassanTMadani/gamelog-project
 cd gamelog-project
 ```
 
