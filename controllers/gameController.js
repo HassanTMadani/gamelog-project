@@ -3,6 +3,8 @@ const axios = require('axios');
 const { validationResult } = require('express-validator');
 const Game = require('../models/Game');
 
+const BASE_PATH = process.env.BASE_PATH || '';
+
 exports.getHome = (req, res, next) => {
     res.render('index', {
         pageTitle: 'Welcome to GameLog',
@@ -88,8 +90,8 @@ exports.postReview = async (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        // need to re-render the page with the error
-        // If it was an edit, fetch review data, otherwise fetch API data.
+        // This part is complex because we need to re-render the page with the error
+        // If it was an edit, we fetch review data, otherwise we fetch API data.
         if (reviewId) { // It's an edit
              const review = await Game.findReviewById(reviewId);
              return res.status(422).render('game/review', {
@@ -102,19 +104,19 @@ exports.postReview = async (req, res, next) => {
                 validationErrors: errors.array()
             });
         } else { // It's a new review
-            // This is simplified.
+            // This is simplified. For a perfect implementation, you'd re-fetch API data.
              return res.status(422).send("Validation failed: " + errors.array()[0].msg);
         }
     }
     
     try {
-        // If it's a new review, first find or create the game in local DB
+        // If it's a new review, first find or create the game in our local DB
         const localGameId = reviewId ? gameId : await Game.findOrCreateByApiId(apiGameId, name, background_image, released);
         
         // Now save the review (which will update if it exists)
         await Game.saveReview(userId, localGameId, rating, reviewText);
         
-        res.redirect('/library');
+        res.redirect(BASE_PATH + '/library');
     } catch (err) {
         const error = new Error(err);
         error.httpStatusCode = 500;
@@ -127,7 +129,7 @@ exports.getEditReview = async (req, res, next) => {
     try {
         const reviewData = await Game.findReviewById(reviewId);
         if (!reviewData) {
-            return res.redirect('/library');
+            return res.redirect(BASE_PATH + '/library');
         }
         res.render('game/review', {
             pageTitle: `Edit Review for ${reviewData.name}`,
@@ -150,7 +152,7 @@ exports.postDeleteReview = async (req, res, next) => {
     const { reviewId } = req.body;
     try {
         await Game.deleteReview(reviewId);
-        res.redirect('/library');
+        res.redirect(BASE_PATH + '/library');
     } catch (err) {
         const error = new Error(err);
         error.httpStatusCode = 500;

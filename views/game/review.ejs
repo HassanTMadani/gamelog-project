@@ -14,12 +14,11 @@
     </div>
 
     <div class="form-container">
-        <form class="auth-form" action="/review" method="POST">
+        <form class="auth-form" action="<%= BASE_PATH %>/review" method="POST">
             <% if (errorMessage) { %>
                 <div class="user-message user-message--error"><%= errorMessage %></div>
             <% } %>
 
-            <!-- hidden inputs are v important for controller -->
             <% if (editing) { %>
                 <input type="hidden" name="reviewId" value="<%= review.id %>">
                 <input type="hidden" name="gameId" value="<%= game.game_id %>">
@@ -33,7 +32,6 @@
             <div class="form-control">
                 <label for="rating">Your Rating (out of 5)</label>
                 <select name="rating" id="rating" required>
-                    <!-- Loop to create options and select the current rating -->
                     <% for(let i = 1; i <= 5; i++) { %>
                         <option value="<%= i %>" <%= (review.rating == i) ? 'selected' : '' %> >
                             <%= i %> Star<%= i > 1 ? 's' : '' %>

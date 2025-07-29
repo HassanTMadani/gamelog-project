@@ -2,6 +2,8 @@
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 
+const BASE_PATH = process.env.BASE_PATH || '';
+
 exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
@@ -34,7 +36,7 @@ exports.postLogin = async (req, res, next) => {
         if (err) {
           console.error(err);
         }
-        res.redirect('/library');
+        res.redirect(BASE_PATH + '/library');
       });
     }
 
@@ -77,7 +79,7 @@ exports.postRegister = async (req, res, next) => {
 
   try {
     await User.create(name, email, password);
-    res.redirect('/login');
+    res.redirect(BASE_PATH + '/login');
   } catch (err) {
     const error = new Error(err);
     error.httpStatusCode = 500;
@@ -90,6 +92,6 @@ exports.postLogout = (req, res, next) => {
     if (err) {
       console.log(err);
     }
-    res.redirect('/');
+    res.redirect(BASE_PATH + '/');
   });
 };

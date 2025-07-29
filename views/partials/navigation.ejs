@@ -1,20 +1,20 @@
 <header class="main-header">
     <nav class="main-header__nav">
         <div class="main-header__brand">
-            <a href="/">GameLog</a>
+            <a href="<%= BASE_PATH %>/ ">GameLog</a>
         </div>
         <ul class="main-header__items">
             <% if (isAuthenticated) { %>
-                <li class="main-header__item"><a class="<%= path === '/search' ? 'active' : '' %>" href="/search">Search</a></li>
-                <li class="main-header__item"><a class="<%= path === '/library' ? 'active' : '' %>" href="/library">My Library</a></li>
+                <li class="main-header__item"><a class="<%= path === '/search' ? 'active' : '' %>" href="<%= BASE_PATH %>/search">Search</a></li>
+                <li class="main-header__item"><a class="<%= path === '/library' ? 'active' : '' %>" href="<%= BASE_PATH %>/library">My Library</a></li>
                 <li class="main-header__item">
-                    <form action="/logout" method="POST">
+                    <form action="<%= BASE_PATH %>/logout" method="POST">
                         <button type="submit">Logout (<%= user.name %>)</button>
                     </form>
                 </li>
             <% } else { %>
-                <li class="main-header__item"><a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a></li>
-                <li class="main-header__item"><a class="<%= path === '/register' ? 'active' : '' %>" href="/register">Register</a></li>
+                <li class="main-header__item"><a class="<%= path === '/login' ? 'active' : '' %>" href="<%= BASE_PATH %>/login">Login</a></li>
+                <li class="main-header__item"><a class="<%= path === '/register' ? 'active' : '' %>" href="<%= BASE_PATH %>/register">Register</a></li>
             <% } %>
         </ul>
     </nav>

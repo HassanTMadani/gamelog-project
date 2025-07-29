@@ -1,7 +1,7 @@
 <%- include('../partials/head.ejs') %>
 
 <div class="form-container">
-    <form class="auth-form" action="/register" method="POST">
+    <form class="auth-form" action="<%= BASE_PATH %>/register" method="POST">
         <h2>Create an Account</h2>
         <% if (errorMessage) { %>
             <div class="user-message user-message--error"><%= errorMessage %></div>
@@ -38,7 +38,7 @@
         </div>
         <button class="btn" type="submit">Register</button>
         <div class="form-switch">
-            <p>Already have an account? <a href="/login">Login here</a>.</p>
+            <p>Already have an account? <a href="<%= BASE_PATH %>/login">Login here</a>.</p>
         </div>
     </form>
 </div>
