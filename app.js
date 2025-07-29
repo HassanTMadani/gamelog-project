@@ -50,9 +50,9 @@ app.use(session({
 
 // Middleware to make session and user info available in all views
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.session.isLoggedIn;
-  res.locals.user = req.session.user;
-  res.locals.BASE_PATH = BASE_PATH; // Make BASE_PATH available in all templates
+  app.locals.BASE_URL = process.env.BASE_URL || ''; // For controllers
+  res.locals.BASE_URL = process.env.BASE_URL || ''; // For views
+  // ... your other res.locals
   next();
 });
 
