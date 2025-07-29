@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= pageTitle %></title>
-    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- THIS IS THE NEW, CRITICAL LINE -->
+    <base href="<%= BASE_URL %>/">
+
+    <link rel="stylesheet" href="css/style.css"> <!-- NO LONGER NEEDS A SLASH -->
 </head>
 <body>
     <%- include('navigation.ejs') %>
