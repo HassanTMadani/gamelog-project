@@ -1,0 +1,36 @@
+<%- include('../partials/head.ejs') %>
+
+<div class="form-container">
+    <form class="auth-form" action="/login" method="POST">
+        <h2>Login</h2>
+        <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+        <% } %>
+        <div class="form-control">
+            <label for="email">E-Mail</label>
+            <input 
+                class="<%= validationErrors.find(e => e.path === 'email') ? 'invalid' : '' %>"
+                type="email" 
+                name="email" 
+                id="email" 
+                value="<%= oldInput.email %>"
+                required>
+        </div>
+        <div class="form-control">
+            <label for="password">Password</label>
+            <input 
+                class="<%= validationErrors.find(e => e.path === 'password') ? 'invalid' : '' %>"
+                type="password" 
+                name="password" 
+                id="password" 
+                value="<%= oldInput.password %>"
+                required>
+        </div>
+        <button class="btn" type="submit">Login</button>
+        <div class="form-switch">
+            <p>Don't have an account? <a href="/register">Register here</a>.</p>
+        </div>
+    </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>

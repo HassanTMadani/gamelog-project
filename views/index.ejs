@@ -1,0 +1,15 @@
+<%- include('partials/head.ejs') %>
+
+<div class="welcome-container">
+    <h1>Welcome to GameLog</h1>
+    <p>Your personal space to discover, track, and review your entire video game collection.</p>
+    <div class="welcome-actions">
+        <% if (isAuthenticated) { %>
+            <a href="/library" class="btn">Go to My Library</a>
+        <% } else { %>
+            <a href="/register" class="btn">Get Started for Free</a>
+        <% } %>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

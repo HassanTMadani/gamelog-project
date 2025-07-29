@@ -1,0 +1,34 @@
+<%- include('../partials/head.ejs') %>
+
+<div class="page-header">
+    <h1>Discover Games</h1>
+    <form class="search-form" action="/search" method="POST">
+        <input type="text" name="query" placeholder="e.g., Cyberpunk 2077" value="<%= query %>" required>
+        <button class="btn" type="submit">Search</button>
+    </form>
+</div>
+
+
+<% if (games.length > 0) { %>
+    <h2>Search Results for "<%= query %>"</h2>
+    <div class="grid">
+        <% games.forEach(game => { %>
+            <article class="card game-card">
+                <div class="card__image">
+                    <img src="<%= game.background_image ? game.background_image : '/images/placeholder.jpg' %>" alt="<%= game.name %>">
+                </div>
+                <div class="card__content">
+                    <h3 class="card__title"><%= game.name %></h3>
+                    <p class="card__meta">Released: <%= new Date(game.released).toLocaleDateString() %></p>
+                </div>
+                <div class="card__actions">
+                    <a href="/review/<%= game.id %>" class="btn">Review this Game</a>
+                </div>
+            </article>
+        <% }); %>
+    </div>
+<% } else if (query) { %>
+    <p>No games found for "<%= query %>". Try a different search term.</p>
+<% } %>
+
+<%- include('../partials/footer.ejs') %>
