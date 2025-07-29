@@ -14,7 +14,7 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Use the promise-based API for modern async/await syntax
+// Use promise API for modern syntax
 module.exports = pool.promise();
 
 console.log('Database connection pool created.');

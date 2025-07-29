@@ -8,13 +8,13 @@ class User {
   // The methods remain the same
   static async findByEmail(email) {
     try {
-      // The parameterized query prevents SQL injection
+      //prevents SQL injection
       const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
-      // Return the first row found, or undefined if no user exists
+      // Return the first row found, or undefined if no user
       return rows[0];
     } catch (error) {
       console.error('FATAL ERROR in User.findByEmail:', error);
-      // We re-throw the error so it can be caught by our global error handler
+      // re-throw the error so it can be caught by error handler
       throw error;
     }
   }

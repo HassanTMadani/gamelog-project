@@ -30,7 +30,7 @@ class Game {
   /**
    * Saves or updates a user's review for a game.
    * This uses the advanced "ON DUPLICATE KEY UPDATE" clause for efficiency.
-   * Make sure you have a UNIQUE constraint on (user_id, game_id) in your reviews table.
+   * Make sure have a UNIQUE constraint on (user_id, game_id) in reviews table.
    */
   static async saveReview(userId, localGameId, rating, reviewText) {
     try {

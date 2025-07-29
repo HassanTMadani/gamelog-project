@@ -88,8 +88,8 @@ exports.postReview = async (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        // This part is complex because we need to re-render the page with the error
-        // If it was an edit, we fetch review data, otherwise we fetch API data.
+        // need to re-render the page with the error
+        // If it was an edit, fetch review data, otherwise fetch API data.
         if (reviewId) { // It's an edit
              const review = await Game.findReviewById(reviewId);
              return res.status(422).render('game/review', {
@@ -102,13 +102,13 @@ exports.postReview = async (req, res, next) => {
                 validationErrors: errors.array()
             });
         } else { // It's a new review
-            // This is simplified. For a perfect implementation, you'd re-fetch API data.
+            // This is simplified.
              return res.status(422).send("Validation failed: " + errors.array()[0].msg);
         }
     }
     
     try {
-        // If it's a new review, first find or create the game in our local DB
+        // If it's a new review, first find or create the game in local DB
         const localGameId = reviewId ? gameId : await Game.findOrCreateByApiId(apiGameId, name, background_image, released);
         
         // Now save the review (which will update if it exists)
