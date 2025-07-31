@@ -54,7 +54,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Route Handlers (clean, no BASE_PATH)
+// Route Handlers ()
 app.use('/', authRoutes);
 app.use('/', indexRoutes);
 app.use('/api', apiRoutes);

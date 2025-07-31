@@ -5,9 +5,9 @@
     <p>Your personal space to discover, track, and review your entire video game collection.</p>
     <div class="welcome-actions">
         <% if (isAuthenticated) { %>
-            <a href="<%= BASE_PATH %>/library" class="btn">Go to My Library</a>
+           <a href="/library" class="btn">Go to My Library</a>
         <% } else { %>
-            <a href="<%= BASE_PATH %>/register" class="btn">Get Started for Free</a>
+            <a href="/register" class="btn">Get Started for Free</a>
         <% } %>
     </div>
 </div>
