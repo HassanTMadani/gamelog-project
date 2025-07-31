@@ -2,8 +2,6 @@
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 
-const BASE_PATH = process.env.BASE_PATH || '';
-
 exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
@@ -27,7 +25,6 @@ exports.postLogin = async (req, res, next) => {
         validationErrors: []
       });
     }
-
     const doMatch = await User.verifyPassword(password, user.password);
     if (doMatch) {
       req.session.isLoggedIn = true;
@@ -36,10 +33,10 @@ exports.postLogin = async (req, res, next) => {
         if (err) {
           console.error(err);
         }
-        res.redirect(BASE_PATH + '/library');
+        // FIXED: Redirect to home page after successful login, not back to login
+        res.redirect('/');
       });
     }
-
     res.status(422).render('auth/login', {
         path: '/login',
         pageTitle: 'Login',
@@ -76,10 +73,10 @@ exports.postRegister = async (req, res, next) => {
       validationErrors: errors.array()
     });
   }
-
   try {
     await User.create(name, email, password);
-    res.redirect(BASE_PATH + '/login');
+    // FIXED: Simple redirect to login - no BASE_URL needed
+    res.redirect('/login');
   } catch (err) {
     const error = new Error(err);
     error.httpStatusCode = 500;
@@ -92,6 +89,7 @@ exports.postLogout = (req, res, next) => {
     if (err) {
       console.log(err);
     }
-    res.redirect(BASE_PATH + '/');
+    // FIXED: Simple redirect to home - no BASE_URL needed
+    res.redirect('/');
   });
 };
