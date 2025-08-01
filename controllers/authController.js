@@ -34,7 +34,7 @@ exports.postLogin = async (req, res, next) => {
           console.error(err);
         }
         // FIXED: Redirect to home page after successful login, not back to login
-        res.redirect('/');
+        res.redirect(process.env.BASE_PATH + '/');
       });
     }
     res.status(422).render('auth/login', {
