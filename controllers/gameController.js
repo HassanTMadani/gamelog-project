@@ -3,7 +3,7 @@ const axios = require('axios');
 const { validationResult } = require('express-validator');
 const Game = require('../models/Game');
 
-const BASE_PATH = process.env.BASE_PATH || '';
+// The BASE_PATH constant has been removed from here.
 
 exports.getHome = (req, res, next) => {
     res.render('index', {
@@ -116,7 +116,8 @@ exports.postReview = async (req, res, next) => {
         // Now save the review (which will update if it exists)
         await Game.saveReview(userId, localGameId, rating, reviewText);
         
-        res.redirect(BASE_PATH + '/library');
+        // FIXED: Redirect to the simple root-relative path
+        res.redirect('/library');
     } catch (err) {
         const error = new Error(err);
         error.httpStatusCode = 500;
@@ -129,7 +130,8 @@ exports.getEditReview = async (req, res, next) => {
     try {
         const reviewData = await Game.findReviewById(reviewId);
         if (!reviewData) {
-            return res.redirect(BASE_PATH + '/library');
+            // FIXED: Redirect to the simple root-relative path
+            return res.redirect('/library');
         }
         res.render('game/review', {
             pageTitle: `Edit Review for ${reviewData.name}`,
@@ -152,7 +154,8 @@ exports.postDeleteReview = async (req, res, next) => {
     const { reviewId } = req.body;
     try {
         await Game.deleteReview(reviewId);
-        res.redirect(BASE_PATH + '/library');
+        // FIXED: Redirect to the simple root-relative path
+        res.redirect('/library');
     } catch (err) {
         const error = new Error(err);
         error.httpStatusCode = 500;
