@@ -7,6 +7,7 @@ const { body } = require('express-validator');
 const router = express.Router();
 
 router.get('/', gameController.getHome);
+router.get('/about', gameController.getAboutPage);
 router.get('/search', isAuth, gameController.getSearch);
 router.post('/search', isAuth, gameController.postSearch);
 router.get('/library', isAuth, gameController.getLibrary);

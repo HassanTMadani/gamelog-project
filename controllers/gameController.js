@@ -10,6 +10,13 @@ exports.getHome = (req, res, next) => {
     });
 };
 
+exports.getAboutPage = (req, res, next) => {
+    res.render('about', {
+        pageTitle: 'About GameLog',
+        currentPath: '/about'
+    });
+};
+
 exports.getSearch = (req, res, next) => {
     res.render('game/search', {
         pageTitle: 'Search Games',
