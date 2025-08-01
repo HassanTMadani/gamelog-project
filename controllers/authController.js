@@ -75,8 +75,7 @@ exports.postRegister = async (req, res, next) => {
   }
   try {
     await User.create(name, email, password);
-    // FIXED: Simple redirect to login - no BASE_URL needed
-    res.redirect('/login');
+    res.redirect(process.env.BASE_PATH + '/login');
   } catch (err) {
     const error = new Error(err);
     error.httpStatusCode = 500;
@@ -89,7 +88,6 @@ exports.postLogout = (req, res, next) => {
     if (err) {
       console.log(err);
     }
-    // FIXED: Simple redirect to home - no BASE_URL needed
-    res.redirect('/');
+    res.redirect(process.env.BASE_PATH + '/');
   });
 };
