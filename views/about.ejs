@@ -1,20 +1,24 @@
 <%- include('partials/head.ejs') %>
 
-<div class="welcome-container" style="max-width: 800px; margin: 2rem auto; text-align: left;">
-    <h1 style="text-align: center;">About GameLog</h1>
-    <p>
-        GameLog is a full-stack web application designed to fulfill the coursework requirements for the "Databases and the Web" module. It serves as a practical demonstration of building a modern, data-driven website from the ground up.
-    </p>
+<div class="welcome-container">
+  <h1>About GameLog</h1>
+  <p>
+    GameLog is a full-stack web application built for the "Databases and the Web" coursework. It demonstrates how to create a modern, data-driven site from scratch.
+  </p>
 
-    <h2>Core Technologies</h2>
-    <p>
-        The application is built on the <strong>Node.js</strong> runtime and uses the <strong>Express</strong> framework to handle routing and middleware[cite: 21, 22]. The front-end is rendered dynamically using <strong>EJS (Embedded JavaScript)</strong>, which allows server-side data to be injected directly into the HTML templates[cite: 23]. All user and game review data is stored and managed in a <strong>MySQL</strong> database[cite: 24, 38].
-    </p>
+  <h2>Core Technologies</h2>
+  <p>
+    • <strong>Node.js & Express:</strong> Server runtime and framework for routing and middleware.  
+    • <strong>EJS:</strong> Templating engine that injects server data into HTML.  
+    • <strong>MySQL:</strong> Relational database storing all user and review information.
+  </p>
 
-    <h2>Key Features</h2>
-    <p>
-        GameLog consumes data from the public <strong>RAWG Video Games Database API</strong> to allow users to search for games[cite: 37]. Users can create an account, log in securely, and maintain a personal library of games they have reviewed[cite: 31, 32]. The application also provides its own API endpoint to expose user library data, demonstrating a complete client-server and server-to-server data flow.
-    </p>
+  <h2>Key Features</h2>
+  <p>
+    • Search games via the public RAWG API.  
+    • Secure user signup/login and personalized review library.  
+    • Built-in API endpoint to share library data programmatically.
+  </p>
 </div>
 
 <%- include('partials/footer.ejs') %>
