@@ -50,7 +50,7 @@ app.use(session({
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.user = req.session.user;
-  res.locals.path = req.path;
+  res.locals.currentPath = req.path;
   next();
 });
 
@@ -67,7 +67,7 @@ app.use((error, req, res, next) => {
   const message = error.message || 'An internal server error occurred.';
   res.status(status).render('500', {
     pageTitle: 'Error!',
-    path: '/500',
+    currentPath: '/500',
     errorMessage: message
   });
 });
@@ -76,7 +76,7 @@ app.use((error, req, res, next) => {
 app.use((req, res, next) => {
   res.status(404).render('404', { 
     pageTitle: 'Page Not Found', 
-    path: '/404' 
+    currentPath: '/404' 
   });
 });
 

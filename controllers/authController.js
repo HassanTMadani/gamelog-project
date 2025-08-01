@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
-    path: '/login',
+    currentPath: '/login',
     pageTitle: 'Login',
     errorMessage: null,
     oldInput: { email: '', password: '' },
@@ -18,7 +18,7 @@ exports.postLogin = async (req, res, next) => {
     const user = await User.findByEmail(email);
     if (!user) {
       return res.status(422).render('auth/login', {
-        path: '/login',
+        currentPath: '/login',
         pageTitle: 'Login',
         errorMessage: 'Invalid email or password.',
         oldInput: { email, password },
@@ -38,7 +38,7 @@ exports.postLogin = async (req, res, next) => {
       });
     }
     res.status(422).render('auth/login', {
-        path: '/login',
+        currentPath: '/login',
         pageTitle: 'Login',
         errorMessage: 'Invalid email or password.',
         oldInput: { email, password },
@@ -53,7 +53,7 @@ exports.postLogin = async (req, res, next) => {
 
 exports.getRegister = (req, res, next) => {
   res.render('auth/register', {
-    path: '/register',
+    currentPath: '/register',
     pageTitle: 'Register',
     errorMessage: null,
     oldInput: { name: '', email: '', password: ''},
@@ -66,7 +66,7 @@ exports.postRegister = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).render('auth/register', {
-      path: '/register',
+      currentPath: '/register',
       pageTitle: 'Register',
       errorMessage: errors.array()[0].msg,
       oldInput: { name, email, password },

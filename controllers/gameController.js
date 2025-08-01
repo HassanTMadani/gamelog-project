@@ -3,19 +3,17 @@ const axios = require('axios');
 const { validationResult } = require('express-validator');
 const Game = require('../models/Game');
 
-
-
 exports.getHome = (req, res, next) => {
     res.render('index', {
         pageTitle: 'Welcome to GameLog',
-        path: '/'
+        currentPath: '/'
     });
 };
 
 exports.getSearch = (req, res, next) => {
     res.render('game/search', {
         pageTitle: 'Search Games',
-        path: '/search',
+        currentPath: '/search',
         games: [],
         query: ''
     });
@@ -30,7 +28,7 @@ exports.postSearch = async (req, res, next) => {
         const response = await axios.get(url);
         res.render('game/search', {
             pageTitle: 'Search Results',
-            path: '/search',
+            currentPath: '/search',
             games: response.data.results,
             query: searchQuery
         });
@@ -49,7 +47,7 @@ exports.getLibrary = async (req, res, next) => {
         const library = await Game.getUserLibrary(userId, searchTerm);
         res.render('game/library', {
             pageTitle: 'My Library',
-            path: '/library',
+            currentPath: '/library',
             games: library,
             searchTerm: searchTerm
         });
@@ -70,7 +68,7 @@ exports.getReviewPage = async (req, res, next) => {
         const game = response.data;
         res.render('game/review', {
             pageTitle: `Review ${game.name}`,
-            path: '/review',
+            currentPath: '/review',
             game: game,
             review: { rating: 3, review_text: '' }, // Default values
             editing: false,
@@ -96,7 +94,7 @@ exports.postReview = async (req, res, next) => {
              const review = await Game.findReviewById(reviewId);
              return res.status(422).render('game/review', {
                 pageTitle: `Edit Review for ${review.name}`,
-                path: '/review',
+                currentPath: '/review',
                 game: review,
                 review: { id: reviewId, rating: rating, review_text: reviewText },
                 editing: true,
@@ -135,7 +133,7 @@ exports.getEditReview = async (req, res, next) => {
         }
         res.render('game/review', {
             pageTitle: `Edit Review for ${reviewData.name}`,
-            path: '/review',
+            currentPath: '/review',
             game: reviewData, // contains game info
             review: reviewData, // contains review info
             editing: true,

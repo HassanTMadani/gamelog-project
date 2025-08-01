@@ -5,17 +5,17 @@
         </div>
         <ul class="main-header__items">
             <% if (isAuthenticated) { %>
-                <li class="main-header__item"><a class="<%= path === '/search' ? 'active' : '' %>" href="/search">Search</a></li>
-                <li class="main-header__item"><a class="<%= path === '/library' ? 'active' : '' %>" href="/library">My Library</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/search' ? 'active' : '' %>" href="/search">Search</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/library' ? 'active' : '' %>" href="/library">My Library</a></li>
                 <li class="main-header__item">
                     <form action="/logout" method="POST">
                         <button type="submit">Logout (<%= user.name %>)</button>
                     </form>
                 </li>
             <% } else { %>
-                <li class="main-header__item"><a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a></li>
-                <li class="main-header__item"><a class="<%= path === '/register' ? 'active' : '' %>" href="/register">Register</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/login' ? 'active' : '' %>" href="/login">Login</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/register' ? 'active' : '' %>" href="/register">Register</a></li>
             <% } %>
         </ul>
     </nav>
-</header> 
+</header>
