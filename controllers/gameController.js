@@ -3,7 +3,7 @@ const axios = require('axios');
 const { validationResult } = require('express-validator');
 const Game = require('../models/Game');
 
-// The BASE_PATH constant has been removed from here.
+
 
 exports.getHome = (req, res, next) => {
     res.render('index', {
