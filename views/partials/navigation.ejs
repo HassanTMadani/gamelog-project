@@ -1,20 +1,22 @@
 <header class="main-header">
     <nav class="main-header__nav">
         <div class="main-header__brand">
-            <a href="/">GameLog</a>
+            <a href="<%= basePath %>/gamelog-project/gamelog-project-main/">GameLog</a>
         </div>
         <ul class="main-header__items">
             <% if (isAuthenticated) { %>
-                <li class="main-header__item"><a class="<%= currentPath === '/search' ? 'active' : '' %>" href="/search">Search</a></li>
-                <li class="main-header__item"><a class="<%= currentPath === '/library' ? 'active' : '' %>" href="/library">My Library</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/search' ? 'active' : '' %>" href="<%= basePath %>/gamelog-project/gamelog-project-main/search">Search</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/library' ? 'active' : '' %>" href="<%= basePath %>/gamelog-project/gamelog-project-main/library">My Library</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/about' ? 'active' : '' %>" href="<%= basePath %>/gamelog-project/gamelog-project-main/about">About</a></li>
                 <li class="main-header__item">
-                    <form action="/logout" method="POST">
+                    <form action="<%= basePath %>/gamelog-project/gamelog-project-main/logout" method="POST">
                         <button type="submit">Logout (<%= user.name %>)</button>
                     </form>
                 </li>
             <% } else { %>
-                <li class="main-header__item"><a class="<%= currentPath === '/login' ? 'active' : '' %>" href="/login">Login</a></li>
-                <li class="main-header__item"><a class="<%= currentPath === '/register' ? 'active' : '' %>" href="/register">Register</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/login' ? 'active' : '' %>" href="<%= basePath %>/gamelog-project/gamelog-project-main/login">Login</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/register' ? 'active' : '' %>" href="<%= basePath %>/gamelog-project/gamelog-project-main/register">Register</a></li>
+                <li class="main-header__item"><a class="<%= currentPath === '/about' ? 'active' : '' %>" href="<%= basePath %>/gamelog-project/gamelog-project-main/about">About</a></li>
             <% } %>
         </ul>
     </nav>
