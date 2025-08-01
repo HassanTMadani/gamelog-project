@@ -115,7 +115,7 @@ exports.postReview = async (req, res, next) => {
         await Game.saveReview(userId, localGameId, rating, reviewText);
         
         // FIXED: Redirect to the simple root-relative path
-        res.redirect('/library');
+        res.redirect(process.env.BASE_PATH + '/library');
     } catch (err) {
         const error = new Error(err);
         error.httpStatusCode = 500;
@@ -128,8 +128,8 @@ exports.getEditReview = async (req, res, next) => {
     try {
         const reviewData = await Game.findReviewById(reviewId);
         if (!reviewData) {
-            // FIXED: Redirect to the simple root-relative path
-            return res.redirect('/library');
+         
+            res.redirect(process.env.BASE_PATH + '/library');
         }
         res.render('game/review', {
             pageTitle: `Edit Review for ${reviewData.name}`,
@@ -152,8 +152,7 @@ exports.postDeleteReview = async (req, res, next) => {
     const { reviewId } = req.body;
     try {
         await Game.deleteReview(reviewId);
-        // FIXED: Redirect to the simple root-relative path
-        res.redirect('/library');
+        res.redirect(process.env.BASE_PATH + '/library');
     } catch (err) {
         const error = new Error(err);
         error.httpStatusCode = 500;
